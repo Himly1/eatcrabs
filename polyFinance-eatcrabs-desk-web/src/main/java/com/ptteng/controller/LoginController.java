@@ -154,7 +154,7 @@ public class LoginController {
             model.addAttribute("message", errorJson);
             return "exception";
         }
-        String gesture = vo.getGesture();
+        String gesture = vo.getPassword();
         Subject subject = SecurityUtils.getSubject();
         logger.info("手势密码登录接口接收参数：{},ip:{}", gesture, IPUtil.getIpAddr(request));
         String account = (String) subject.getPrincipal();
