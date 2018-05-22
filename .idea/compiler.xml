@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="poly-Finance-eat-crabs-desk-web" />
+        <module name="polyFinance-eatcrabs-backstage-web" />
+        <module name="polyFinance-eatcrabs-business-service" />
+        <module name="polyFinance-eatcrabs-common-service" />
+        <module name="polyFinance-eatcrabs-core-all" />
+        <module name="polyFinance-eatcrabs-core-web" />
+        <module name="polyFinance-eatcrabs-desk-web" />
+        <module name="polyFinance-eatcrabs-manager-service" />
+        <module name="polyFinance=eatcrabs=core=web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="eatcrabs" target="1.8" />
+      <module name="poly-Finance-eat-crabs-desk-web" target="1.8" />
+      <module name="polyFinance-eatcrabs-backstage-web" target="1.8" />
+      <module name="polyFinance-eatcrabs-business-service" target="1.8" />
+      <module name="polyFinance-eatcrabs-common-service" target="1.8" />
+      <module name="polyFinance-eatcrabs-core-all" target="1.8" />
+      <module name="polyFinance-eatcrabs-core-web" target="1.8" />
+      <module name="polyFinance-eatcrabs-desk-web" target="1.8" />
+      <module name="polyFinance-eatcrabs-manager-service" target="1.8" />
+      <module name="polyFinance=eatcrabs=core=web" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
