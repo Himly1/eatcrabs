@@ -21,10 +21,6 @@ public class PaymentController {
 
     /**
      * 提交投资金额
-     * @param productId
-     * @param amount
-     * @param model
-     * @return
      */
     @RequestMapping(value = "/b/invest/{productId}/amount", method = RequestMethod.POST)
     public String investAmount(@PathVariable Long productId, @RequestBody Long amount, Model model){
@@ -34,8 +30,6 @@ public class PaymentController {
 
     /**
      * 获取验证码
-     * @param model
-     * @return
      */
     @RequestMapping(value = "/b/invest/vcode/new", method = RequestMethod.GET)
     public String getInvestVcode(Model model){
@@ -44,9 +38,6 @@ public class PaymentController {
 
     /**
      * 验证交易
-     * @param investVO
-     * @param model
-     * @return
      */
     @RequestMapping(value = "/b/invest", method = RequestMethod.POST)
     public String invest(@RequestBody TpwdVcodeVO investVO, Model model){
@@ -64,10 +55,8 @@ public class PaymentController {
 
     /**
      * 电子签章（提交）
-     * @param file
-     * @param model
-     * @return
      */
+
     @RequestMapping(value = "/b/invest/upload", method = RequestMethod.POST)
     public String investUpload(MultipartFile file, Model model){
         return "success";

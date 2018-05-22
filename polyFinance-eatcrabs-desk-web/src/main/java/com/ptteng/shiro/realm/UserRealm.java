@@ -2,8 +2,7 @@ package com.ptteng.shiro.realm;
 
 import com.ptteng.domain.business.User;
 import com.ptteng.dubbo.DeskConsumer;
-import com.ptteng.utlis.ShiroUtil;
-import org.apache.shiro.SecurityUtils;
+import com.ptteng.shiro.token.DeskToken;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -26,20 +25,17 @@ public class UserRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        //获取基于用户名和密码的令牌
-        //实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的
-        //两个token的引用都是一样的
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        //此处无需比对,比对的逻辑Shiro会做,我们只需返回一个和令牌相关的正确的验证信息
-        //这样一来,在随后的登录页面上就只有这里指定的用户和密码才能通过验证
+        //具体细节可以查看后台模块注解
+        DeskToken token = (DeskToken) authenticationToken;
         User user = consumer.getCustomerService().getUserLoginToken(token.getUsername());
-        if (null != user) {
-            logger.info("获取到的user信息：" + user.toString());
-            ShiroUtil.addValue(SecurityUtils.getSubject(), "mobile", user.getAccount());
-            ShiroUtil.addValue(SecurityUtils.getSubject(), "id", user.getId());
-            return new SimpleAuthenticationInfo(token.getUsername(), user.getKey(), "userReaml");
-        } else {
+        if (user == null) {
             throw new UnknownAccountException();
+        } else if (user.getFreeze() == -1) {
+            throw new DisabledAccountException();
+        } else {
+            logger.info("获取到的user信息：" + user.toString());
+            String key = token.getLoginType().equals(DeskToken.LoginType.PASSWORD) ? user.getKey() : user.getGesture();
+            return new SimpleAuthenticationInfo(token.getUsername(), key, "userReaml");
         }
     }
 }

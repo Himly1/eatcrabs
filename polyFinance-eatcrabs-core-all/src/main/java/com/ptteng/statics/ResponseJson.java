@@ -10,6 +10,8 @@ public class ResponseJson {
     public static final String NOT_LOGIN_MESSAGE = "{\"code\":\"-2\",\"message\":\"登录信息失效\"}";
     //服务器内部错误（通常开发完成后不会出现)
     public static final String ERROR_MESSAGE = "{\"code\":\"-3\",\"message\":\"服务器内部错误\"}";
+    //服务器内部错误（通常开发完成后不会出现)
+    public static final String NEED_GESTURE = "{\"code\":\"-4\",\"message\":\"需要手势密码登录\"}";
     //重复性的数据（可能由输入或者过快的操作导致)
     public static final String BAD_REQUEST_MESSAGE = "{\"code\":\"-5\",\"message\":\"重复性的数据\"}";
 

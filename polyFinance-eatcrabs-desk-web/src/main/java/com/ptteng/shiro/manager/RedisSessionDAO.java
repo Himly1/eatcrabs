@@ -19,8 +19,8 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
 
     private static Logger logger = LoggerFactory.getLogger(RedisSessionDAO.class);
 
-    // session 在redis过期时间是五小时10*30*60
-    private static int expireTime = 18000;
+    // session 在redis过期时间是一天
+    private static int expireTime = 1;
 
     private static String prefix = "desk-session:";
 
@@ -57,7 +57,7 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {
         if (!redisTemplate.hasKey(key)) {
             redisTemplate.opsForValue().set(key, session);
         }
-        redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+        redisTemplate.expire(key, expireTime, TimeUnit.DAYS);
     }
 
     // 删除session

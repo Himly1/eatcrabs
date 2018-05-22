@@ -23,15 +23,12 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 public class FinancialController {
-    public static Logger logger = LoggerFactory.getLogger(FinancialController.class);
+    private static Logger logger = LoggerFactory.getLogger(FinancialController.class);
     @Autowired
     private DeskConsumer consumer;
 
     /**
      * 产品列表
-     *
-     * @param model
-     * @return
      */
     @RequestMapping(value = "/b/u/products", method = RequestMethod.GET)
     public String productList(Model model) {
@@ -44,23 +41,18 @@ public class FinancialController {
     }
 
     /**
-     * 产品详情
-     *
-     * @param productId
-     * @param model
-     * @return
+     * 前台参看产品详情
      */
     @RequestMapping(value = "/b/products/{productId}/detail", method = RequestMethod.POST)
     public String productDetail(@PathVariable Long productId, Model model) {
-        logger.info("产品详情接口接收参数 id：{}", productId);
+        logger.info("前台产品详情接口接收参数 id：{}", productId);
         Product product = consumer.getBusinessService().findSingleProduct(productId);
         if (null == product || -1 == product.getOnsale()) {
-            logger.warn("产品详情接口接收非法参数：{}", productId);
+            logger.warn("前台产品详情接口接收非法参数：{}", productId);
             model.addAttribute("code", -1);
             model.addAttribute("message", "非法的参数请求");
             return "exception";
         }
-
         DealsQuery query = new DealsQuery();
         query.setProductId(productId);
         query.setSuccess(1);
@@ -76,10 +68,6 @@ public class FinancialController {
 
     /**
      * 立即投资
-     *
-     * @param productId
-     * @param model
-     * @return
      */
     @ResponseBody
     @RequestMapping(value = "/b/products/{productId}/invest", method = RequestMethod.POST)
@@ -88,7 +76,7 @@ public class FinancialController {
         //查看产品状态
         Product product = consumer.getBusinessService().findSingleProduct(productId);
         if (null == product || -1 == product.getOnsale()) {
-            logger.warn("产品详情接口接收非法参数：{}", productId);
+            logger.warn("立即投资接口接收非法参数：{}", productId);
             model.addAttribute("code", -1);
             model.addAttribute("message", "非法的参数请求");
             return "exception";

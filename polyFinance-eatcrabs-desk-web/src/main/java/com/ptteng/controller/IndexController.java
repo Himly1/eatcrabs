@@ -31,8 +31,6 @@ public class IndexController {
 
     /**
      * 首页
-     * @param model
-     * @return
      */
     @RequestMapping(value = "/b/u/index", method = RequestMethod.GET)
     public String index(Model model) {
@@ -52,8 +50,6 @@ public class IndexController {
 
     /**
      * banner详情
-     * @param bannerId
-     * @return
      */
     @ResponseBody
     @RequestMapping("/b/u/banners/{bannerId}/detail")
@@ -61,8 +57,8 @@ public class IndexController {
         Banner banner = consumer.getOperationService().getSingleBanner(bannerId);
         Map<String, Object> result = new HashMap<>();
         result.put("name", banner.getName());
-        result.put("content", banner.getContent());
         result.put("img", banner.getImg());
+        result.put("content", banner.getContent());
         return JSON.toJSONString(result);
     }
 }
